@@ -1,0 +1,19 @@
+{
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "description": "",
+    "reporter": [
+        "lcov"
+    ],
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "coverage/",
+      "src/lib",
+      "src/routes/@Interfaces",
+      "src/setup.ts"
+    ],
+    "all": true,
+    "report-dir": ".coverage",
+    "temp-directory": "./.nyc_output"
+}
