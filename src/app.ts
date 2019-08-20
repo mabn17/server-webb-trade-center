@@ -10,6 +10,7 @@ import * as bodyparser from 'body-parser';
 
 // import { me } from './routes/me';
 
+import { auth } from './routes/auth';
 import { responses } from './methods/responses';
 
 const app = express();
@@ -29,6 +30,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 
 // Routes
 // app.use('/', me);
+app.use('/', auth);
 
 /**
  * |--------------------------------------------------

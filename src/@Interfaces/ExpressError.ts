@@ -3,7 +3,7 @@
  * Martin Borg
  */
 
-interface ErrorDerails {
+export interface ErrorDerails {
   source: string;
   title: string;
   detail: string;
