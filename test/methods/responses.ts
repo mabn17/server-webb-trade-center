@@ -5,15 +5,13 @@
 
 /**
  * |--------------------------------------------------
- * | Testing escape module.
+ * | Testing responses module.
  * |--------------------------------------------------
  */
 
 import * as assert from 'assert';
 import { responses } from '../../src/methods/responses';
-
-// tslint:disable-next-line
-var should = require('chai').should();
+import { it, describe } from 'mocha';
 
 const res = responses.getErrorMessage('s', 't', 'd', 1);
 
@@ -30,6 +28,21 @@ describe('responses module with:', () => {
     it('Checks that it follows ExpressError types', () => {
       assert.equal(typeof res.errors.status, 'number');
       assert.equal(typeof res.errors.source, 'string');
+    });
+  });
+  describe('responses.checkValues', () => {
+    it('Checks when return true', () => {
+      assert.equal(responses.checkValues(['a', 1]), true);
+    });
+  });
+  describe('responses.checkValues', () => {
+    it('Checks when return false', () => {
+      assert.equal(responses.checkValues(['s', false]), false);
+    });
+  });
+  describe('responses.checkValues', () => {
+    it('Checks when empty string', () => {
+      assert.equal(responses.checkValues(['', 's']), false);
     });
   });
 });

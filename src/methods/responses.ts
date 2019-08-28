@@ -22,7 +22,7 @@ const responses = {
     let result: boolean = true;
 
     for (let i = 0; i < values.length; i++) {
-      if (!values[i]) {
+      if (!values[i] || values[i] === '') {
         result = false;
         break;
       }

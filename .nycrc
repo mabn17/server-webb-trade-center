@@ -10,7 +10,6 @@
     "exclude": [
       "coverage/",
       "src/lib",
-      "src/routes/@Interfaces",
       "src/setup.ts"
     ],
     "all": true,

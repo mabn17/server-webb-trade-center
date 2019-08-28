@@ -12,9 +12,6 @@
 import * as assert from 'assert';
 import { escapeHtml } from '../../src/methods/escape';
 
-// tslint:disable-next-line
-var should = require('chai').should();
-
 const html = '<h1>A h1 tag</h1>';
 const markdown = '# A h1 tag';
 const mix = `# A h1 tag\n\n<script>alert("hello");</script>`;
