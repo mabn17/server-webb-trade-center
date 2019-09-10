@@ -1,6 +1,6 @@
 {
   "name": "server-webb-trade-center",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "# Badges",
   "main": "index.js",
   "scripts": {
