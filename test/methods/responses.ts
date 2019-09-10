@@ -9,6 +9,8 @@
  * |--------------------------------------------------
  */
 
+process.env.NODE_ENV = 'test';
+
 import * as assert from 'assert';
 import { responses } from '../../src/methods/responses';
 import { it, describe } from 'mocha';

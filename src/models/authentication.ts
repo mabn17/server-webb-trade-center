@@ -93,7 +93,7 @@ const authentication = {
           }
 
           if (result) {
-            const payload = { email: user.email };
+            const payload = { email: user.email, id: user.id, assets: user.assets };
             const jwtToken = sign(payload, process.env.SECRET, { expiresIn: '24h' });
 
             return res.status(200).json({

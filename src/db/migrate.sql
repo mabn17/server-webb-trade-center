@@ -1,6 +1,20 @@
 CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     assets REAL DEFAULT 0.0,
+
     UNIQUE(email)
+);
+
+CREATE TABLE IF NOT EXISTS items (
+    id INTEGER PRIMARY KEY,
+    price REAL DEFAULT 0.0,
+    name VARCHAR(255) NOT NULL,
+    pricture VARCHAR(255) NOT NULL,
+    seller_id INTEGER NOT NULL,
+    buyer_id INTEGER DEFAULT NULL,
+    bought DATE DEFAULT NULL,
+    selling_date DATE DEFAULT NULL,
+    description VARCHAR(255) DEFAULT NULL
 );
