@@ -29,11 +29,11 @@ const authentication = {
    * @param req AuthInfoRequest (extended express.req)
    */
   create: function (res: Response, req: AuthInfoRequest) {
-    const { email, password } = req.body;
+    const { email, password, firstName, lastName } = req.body;
 
-    if (!responses.checkValues([email, password])) {
+    if (!responses.checkValues([email, password, firstName, lastName])) {
       return authentication
-        .sendError(res, '/register', 'Missing values.', 'Email or password missing in request.', 401);
+        .sendError(res, '/register', 'Missing values.', 'Double check so all values are filled in.', 401);
     }
 
     hash(password, 10, function(err, encrypted) {
@@ -41,17 +41,18 @@ const authentication = {
         return authentication
           .sendError(res, '/register', 'bcrypt error.', 'Error encrypting the given password.', 500);
       }
-      db.run('INSERT INTO users (email, password) VALUES (?, ?)',
-        email,
-        encrypted, (err: any) => {
+      db.run('INSERT INTO users (email, password, first_name, last_name) VALUES (?, ?, ?, ?)',
+        email, encrypted,
+        firstName, lastName,
+        (err: any) => {
           if (err) {
             return authentication
-              .sendError(res, '/register', 'Database error.', err.message, 500);
+              .sendError(res, '/register', 'Database error.', 'Email allready exists', 500);
           }
 
           return res.status(201).json({
             data: {
-                message: 'User successfully registered.'
+              message: 'User successfully registered.'
             }
           });
       });
@@ -93,7 +94,13 @@ const authentication = {
           }
 
           if (result) {
-            const payload = { email: user.email, id: user.id, assets: user.assets };
+            const payload = {
+              email: user.email,
+              id: user.id,
+              assets: user.assets,
+              first_name: user.first_name,
+              last_name: user.last_name
+            };
             const jwtToken = sign(payload, process.env.SECRET, { expiresIn: '24h' });
 
             return res.status(200).json({

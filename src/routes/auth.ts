@@ -9,11 +9,11 @@ import { authentication } from '../models/authentication';
 
 const auth: express.Router = express.Router();
 
-auth.post('/register', (req: AuthInfoRequest, res: express.Response, next: express.NextFunction) =>
+auth.post('/register', (req: AuthInfoRequest, res: express.Response, _next: express.NextFunction) =>
   authentication.create(res, req)
 );
 
-auth.post('/login', (req: AuthInfoRequest, res: express.Response, next: express.NextFunction) =>
+auth.post('/login', (req: AuthInfoRequest, res: express.Response, _next: express.NextFunction) =>
   authentication.login(res, req)
 );
 
