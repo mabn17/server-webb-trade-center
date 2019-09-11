@@ -13,8 +13,8 @@ An express server for exam project in [Ramverk2 *v2*](https://jsramverk.me).
 Start production server: `npm run run:build && npm run start:prod`
 
 ## Requirements
-1. [Docker](https://www.docker.com/)
-2. [Sqlite3](https://www.sqlite.org/index.html)
+1. [Sqlite3](https://www.sqlite.org/index.html)
+1. [Docker](https://www.docker.com/) - *(Only for test 2 - 5 see below)*
 
 # Testing 
 1. `npm test` - To see reports from the unittests.  
