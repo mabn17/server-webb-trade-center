@@ -34,12 +34,12 @@ const Stocks = {
       (err, rows) => {
         if (err) {
           return Stocks
-            .sendError(res, '/login', 'Database error.', err.message, 500);
+            .sendError(res, '/stocks', 'Database error.', err.message, 500);
         }
 
         if (rows === undefined) {
           return Stocks
-            .sendError(res, '/login', 'User not found.', 'User with provided email not found.', 401);
+            .sendError(res, '/stocks', 'User not found.', 'User with provided email not found.', 401);
         }
 
         const data = rows;
@@ -64,7 +64,7 @@ const Stocks = {
       (err, rows) => {
         if (err) {
           return Stocks
-            .sendError(res, '/login', 'Database error.', err.message, 500);
+            .sendError(res, '/stocks', 'Database error.', err.message, 500);
         }
 
         if (rows === undefined) {
@@ -90,7 +90,7 @@ const Stocks = {
           );
         }
 
-        return res.status(200).json({
+        return res.status(202).json({
           message: 'Stocks sucsessfylly updated'
         });
       });

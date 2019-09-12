@@ -13,7 +13,7 @@ stock.get('/stocks', (_req: AuthInfoRequest, res: express.Response, _next: expre
     Stocks.getAllStocks(res)
 );
 
-stock.get('/stocks/test', (req: AuthInfoRequest, res: express.Response, _next: express.NextFunction) =>
+stock.put('/stocks', (req: AuthInfoRequest, res: express.Response, _next: express.NextFunction) =>
     Stocks.updateAllStockPrices(res, req)
 );
 

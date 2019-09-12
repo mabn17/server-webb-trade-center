@@ -75,7 +75,7 @@ describe('POST /register', () => {
       chai
         .request(server)
         .post('/register')
-        .send({ email: 'test@test.se', password: 'pass' })
+        .send({ email: 'test@test.se', password: 'pass', firstName: 'Test', lastName: 'Express' })
         .end((err, res) => {
           const response = res.body.data;
 
@@ -91,7 +91,7 @@ describe('POST /register', () => {
       chai
         .request(server)
         .post('/register')
-        .send({ email: 'test@test.se', password: 'pass' })
+        .send({ email: 'test@test.se', password: 'pass', firstName: 'Test', lastName: 'Express' })
         .end((err, res) => {
           const response = res.body.errors;
 
