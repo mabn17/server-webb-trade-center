@@ -10,7 +10,7 @@ import { db } from '../db/database';
 import { responses } from '../methods/responses';
 import { verify, sign } from 'jsonwebtoken';
 
-const authentication = {
+const Authentication = {
   /**
    * Sends an error response
    * @param res express.Response
@@ -32,13 +32,13 @@ const authentication = {
     const { email, password, firstName, lastName } = req.body;
 
     if (!responses.checkValues([email, password, firstName, lastName])) {
-      return authentication
+      return Authentication
         .sendError(res, '/register', 'Missing values.', 'Double check so all values are filled in.', 401);
     }
 
     hash(password, 10, function(err, encrypted) {
       if (err) {
-        return authentication
+        return Authentication
           .sendError(res, '/register', 'bcrypt error.', 'Error encrypting the given password.', 500);
       }
       db.run('INSERT INTO users (email, password, first_name, last_name) VALUES (?, ?, ?, ?)',
@@ -46,7 +46,7 @@ const authentication = {
         firstName, lastName,
         (err: any) => {
           if (err) {
-            return authentication
+            return Authentication
               .sendError(res, '/register', 'Database error.', 'Email allready exists', 500);
           }
 
@@ -68,7 +68,7 @@ const authentication = {
     const { email, password } = req.body;
 
     if (!responses.checkValues([email, password])) {
-      return authentication
+      return Authentication
         .sendError(res, '/login', 'Missing values.', 'Email or password missing in request.', 401);
     }
 
@@ -76,12 +76,12 @@ const authentication = {
       email,
       (err, rows) => {
         if (err) {
-          return authentication
+          return Authentication
             .sendError(res, '/login', 'Database error.', err.message, 500);
         }
 
         if (rows === undefined) {
-          return authentication
+          return Authentication
             .sendError(res, '/login', 'User not found.', 'User with provided email not found.', 401);
         }
 
@@ -89,7 +89,7 @@ const authentication = {
 
         compare(password, user.password, (err, result) => {
           if (err) {
-            return authentication
+            return Authentication
              .sendError(res, '/login', 'bcrypt error.', 'bcrypt error.', 500);
           }
 
@@ -112,7 +112,7 @@ const authentication = {
             });
           }
 
-          return authentication
+          return Authentication
             .sendError(res, '/login', 'Wrong password.', 'Password is incorrect.', 401);
         });
       });
@@ -136,7 +136,7 @@ const authentication = {
     if (token) {
       verify(token.toString(), process.env.SECRET, function(err, decoded) {
         if (err) {
-          return authentication
+          return Authentication
             .sendError(res, req.path, 'Failed authentication.', err.message, 500);
         }
 
@@ -146,10 +146,10 @@ const authentication = {
         return undefined;
       });
     } else {
-      return authentication
+      return Authentication
         .sendError(res, req.path, 'No token.', 'No token provided in request headers.', 401);
     }
   }
 };
 
-export { authentication };
+export { Authentication };
