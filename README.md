@@ -2,6 +2,8 @@
 An express server for exam project in [Ramverk2 *v2*](https://jsramverk.me).
 
 # Badges
+[![Build Status](https://travis-ci.org/mabn17/server-webb-trade-center.svg?branch=master)](https://travis-ci.org/mabn17/server-webb-trade-center)  
+[![Build Status](https://scrutinizer-ci.com/g/mabn17/server-webb-trade-center/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mabn17/server-webb-trade-center/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mabn17/server-webb-trade-center/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mabn17/server-webb-trade-center/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/mabn17/server-webb-trade-center/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mabn17/server-webb-trade-center/?branch=master)
 
 # Installation
 1. Clone the repo `git clone git@github.com:mabn17/server-webb-trade-center.git`.
