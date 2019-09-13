@@ -42,16 +42,41 @@ const Stocks = {
             .sendError(res, '/stocks', 'User not found.', 'User with provided email not found.', 401);
         }
 
-        const data = rows;
+        const items = rows;
 
         if (noRes) {
-          return data;
+          return items;
         }
 
         return res.status(200).json({
-          data
+          items
         });
       });
+  },
+
+  /**
+   * Gets the price history of all stocks.
+   * @param res express.Response
+   */
+  getAllHistory: function(res: Response) {
+    db.all(`SELECT * FROM price_log WHERE when_time BETWEEN datetime('now', '-6 days') AND datetime('now', 'localtime')`,
+    (err, rows) => {
+      if (err) {
+        return Stocks
+        .sendError(res, '/history/stocks', 'Database error.', err.message, 500);
+      }
+
+      if (rows === undefined) {
+        Stocks
+          .sendError(res, '/history/stocks', 'No price log found.', 'No detected price changes in the given week', 401);
+      }
+
+      const data = rows;
+
+      return res.status(200).json({
+        data
+      });
+    });
   },
 
   /**

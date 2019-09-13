@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS items (
     id INTEGER PRIMARY KEY,
     name VARCHAR(60) NOT NULL,
     description VARCHAR(255) NOT NULL,
-    pricture VARCHAR(400) NOT NULL,
+    picture VARCHAR(400) NOT NULL,
     price REAL DEFAULT 0.0,
 
     UNIQUE(name)
@@ -41,5 +41,5 @@ BEGIN
         VALUES(OLD.name, OLD.price);
 END;
 
-INSERT INTO items(name, description, pricture, price)
+INSERT INTO items(name, description, picture, price)
 VALUES ("Gold", "Some gold", "https://www.goodreturns.in/img/2019/08/gold-1565419690.jpg", 5.65);

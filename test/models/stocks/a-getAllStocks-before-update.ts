@@ -31,7 +31,7 @@ describe('GET & PUT /stocks', () => {
         .get('/stocks')
         .send({ })
         .end((err, res) => {
-          const response = res.body.data;
+          const response = res.body.items;
           res.should.have.status(200);
 
           defaultPrice = response[0].price;
@@ -63,7 +63,7 @@ describe('GET & PUT /stocks', () => {
         .get('/stocks')
         .send({ })
         .end((err, res) => {
-          const response = res.body.data;
+          const response = res.body.items;
           res.should.have.status(200);
 
           assert.equal(response[0].price > defaultPrice, true);

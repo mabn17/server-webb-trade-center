@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS items (
     id INTEGER PRIMARY KEY,
     name VARCHAR(60) NOT NULL,
     description VARCHAR(255) NOT NULL,
-    pricture VARCHAR(400) NOT NULL,
+    picture VARCHAR(400) NOT NULL,
     price REAL DEFAULT 0.0,
 
     UNIQUE(name)
@@ -45,7 +45,7 @@ INSERT INTO users(password, email, assets, first_name, last_name)
 VALUES
     ("$2b$10$bZJ3FkvTP9qCZ7dOQHqYNeCggc27iMpOTfCaFjGirLwZ7VEPLqmPG", "martin.d@live.se", 1000.0, "Martin", "Borg");
 
-INSERT INTO items(name, description, pricture, price)
+INSERT INTO items(name, description, picture, price)
 VALUES
     ("Gold", "Some gold", "https://www.goodreturns.in/img/2019/08/gold-1565419690.jpg", 100.65),
     ("Silver", "Shiny silver", "https://static2.proactiveinvestors.co.uk/thumbs/upload/News/Image/2019_08/672z311_1567003954_shutterstock_256676086.jpg", 106.65),
