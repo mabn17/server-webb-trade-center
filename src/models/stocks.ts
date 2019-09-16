@@ -84,7 +84,7 @@ const Stocks = {
    * @param res express.Response
    * @param req AuthInfoRequest (extended express.req)
    */
-  updateAllStockPrices: function (res: Response, req: AuthInfoRequest) {
+  updateAllStockPrices: function (res: Response, _req: AuthInfoRequest) {
     db.all('SELECT * FROM items',
       (err, rows) => {
         if (err) {
@@ -103,7 +103,7 @@ const Stocks = {
           row.price = randomizePrice();
           db.run('UPDATE items SET price = ? WHERE id = ?',
             row.price, row.id,
-            (error, _updated) => {
+            (error: any, _updated: any) => {
               if (error) {
                 return Stocks
                   .sendError(
@@ -117,6 +117,48 @@ const Stocks = {
 
         return res.status(202).json({
           message: 'Stocks sucsessfylly updated'
+        });
+      });
+  },
+
+  /**
+   * Gets all personal user_stocks
+   * @param res express.Response
+   * @param req AuthInfoRequest (extended express.req)
+   */
+  getPersonalStocks: function(res: Response, req: AuthInfoRequest, noRes = false): any {
+    const user = req.user || {};
+
+    if (user === {} && process.env.NODE_ENV !== 'test') {
+      return Stocks
+        .sendError(
+          res, '/sockets/:user', 'Token error',
+          'Could not accsess the user-token in header: x-access-token.', 400
+        );
+    }
+
+    const userId = req.user.id || 1;
+
+    db.all('SELECT * FROM user_stocks WHERE buyer_id = ?',
+      userId, (err, rows) => {
+        if (err) {
+          return Stocks
+            .sendError(res, '/sockets/:user', 'Database error.', err.message, 500);
+        }
+
+        if (rows === undefined) {
+          return Stocks
+            .sendError(res, '/stocks/:user', 'No stocks found.', 'Could not find any stocks', 401);
+        }
+
+        const data = rows;
+
+        if (noRes) {
+          return rows;
+        }
+
+        return res.status(200).json({
+          data
         });
       });
   }

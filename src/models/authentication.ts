@@ -4,7 +4,7 @@
  */
 
 import { Response, NextFunction } from 'express';
-import { AuthInfoRequest } from '../@Interfaces/ExpressRequest';
+import { AuthInfoRequest, UserToken } from '../@Interfaces/ExpressRequest';
 import { hash, compare } from 'bcrypt';
 import { db } from '../db/database';
 import { responses } from '../methods/responses';
@@ -134,7 +134,7 @@ const Authentication = {
     const token = req.headers['x-access-token'];
     /* istanbul ignore next */
     if (token) {
-      verify(token.toString(), process.env.SECRET, function(err, decoded) {
+      verify(token.toString(), process.env.SECRET, function(err, decoded: UserToken) {
         if (err) {
           return Authentication
             .sendError(res, req.path, 'Failed authentication.', err.message, 500);

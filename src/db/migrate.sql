@@ -28,6 +28,8 @@ CREATE TABLE IF NOT EXISTS user_stocks (
     buy_in_date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE UNIQUE INDEX user_stock_index ON user_stocks(item_name, buyer_id);
+
 CREATE TABLE IF NOT EXISTS price_log (
     id INTEGER PRIMARY KEY,
     item_name VARCHAR(60) NOT NULL,
@@ -35,11 +37,35 @@ CREATE TABLE IF NOT EXISTS price_log (
     old_price REAL DEFAULT 0.0
 );
 
+-- TO sell user stocks
+CREATE TRIGGER IF NOT EXISTS sell_stocks AFTER UPDATE ON user_stocks
+WHEN Old.amount > NEW.amount
+BEGIN
+    UPDATE users SET
+        assets =
+            ((SELECT assets FROM users WHERE id = OLD.buyer_id) +
+            ((SELECT price FROM items WHERE name = OLD.item_name) * (OLD.amount - NEW.amount)))
+    WHERE id = OLD.buyer_id;
+END;
+
+-- TO Buy user stocks
+CREATE TRIGGER IF NOT EXISTS buy_stocks AFTER UPDATE ON user_stocks
+WHEN NEW.amount > OLD.amount
+BEGIN
+    UPDATE users SET
+        assets =
+            ((SELECT assets FROM users WHERE id = OLD.buyer_id) -
+            ((SELECT price FROM items WHERE name = OLD.item_name) * (NEW.amount - OLD.amount)))
+    WHERE id = OLD.buyer_id;
+END;
+
+-- TO UPDATE Old prices
 CREATE TRIGGER IF NOT EXISTS price_update AFTER UPDATE ON items
 BEGIN
     INSERT INTO price_log(item_name, old_price)
         VALUES(OLD.name, OLD.price);
 END;
+
 
 INSERT INTO users(password, email, assets, first_name, last_name)
 VALUES
@@ -61,3 +87,12 @@ VALUES
     ("Gold", 20, 1, 100.65),
     ("Silver", 10, 1, 106.65),
     ("Mercury", 4, 1 , 106);
+
+CREATE TRIGGER IF NOT EXISTS buy_new_stocks AFTER INSERT ON user_stocks
+BEGIN
+    UPDATE users SET
+        assets =
+            ((SELECT assets FROM users WHERE id = NEW.buyer_id) -
+            ((SELECT price FROM items WHERE name = NEW.item_name) * NEW.amount))
+    WHERE id = NEW.buyer_id;
+END;
