@@ -23,4 +23,10 @@ personal.post('/user/stocks/buy', (req: AuthInfoRequest, res: express.Response, 
     Personals.buyPersonalStocks(res, req)
 );
 
+// personal.get('/user/self', (req: AuthInfoRequest, res: express.Response, next: express.NextFunction) =>
+// Authentication.verify(req, res, next),
+// (req: AuthInfoRequest, res: express.Response, next: express.NextFunction) =>
+//   Personals.getPersonalData(res, req)
+// );
+
 export { personal };

@@ -9,12 +9,10 @@ import { db } from '../db/database';
 import { responses } from '../methods/responses';
 import { Stocks } from './stocks';
 
-function get(sql, params = []): any {
+function get(sql: string, params = []): any {
   return new Promise((resolve, reject) => {
     db.get(sql, params, (err, result) => {
       if (err) {
-        console.log('Error running sql: ' + sql)
-        console.log(err);
         reject(err);
       } else {
         resolve(result);
@@ -62,7 +60,7 @@ const Personals = {
         );
     }
 
-    const userId = req.user.id || 1;
+    const userId = req.user ? req.user.id : 1;
 
     db.get('SELECT * FROM user_stocks WHERE buyer_id = ? AND item_name = ? AND amount >= ?',
       userId, stockToSell, amountToSell,
@@ -122,7 +120,7 @@ const Personals = {
         );
     }
 
-    const userId = req.user.id || 1;
+    const userId = req.user ? req.user.id : 1;
 
     db.get('SELECT assets FROM users WHERE id = ?',
       userId, async (err, row) => {
@@ -139,11 +137,21 @@ const Personals = {
         const item = await get('SELECT * FROM items WHERE name = ?', stockToBuy);
         const user_stocks = await get('SELECT * FROM user_stocks WHERE item_name = ? AND buyer_id = ?', [stockToBuy, userId]);
         if (!item) {
-          return res.json({ msg: 'inget item' });
+          return Personals
+            .sendError(
+              res, '/user/stocks/buy', 'Value Error',
+              `${stockToBuy} is not a valid item`
+              , 400
+            );
         }
 
         if (row.assets < (amountToBuy * item.price)) {
-          return res.json({ msg: `AjaBaja inte tillräcklingt med cash, du har ${row.assets} och det kostar ${(amountToBuy * item.price)}` });
+          return Personals
+            .sendError(
+              res, '/user/stocks/buy', 'Value Error',
+              `Not enought assets to buy items for (you have: ${row.assets} it costs ${(amountToBuy * item.price)}).`
+              , 400
+            );
         }
 
         const nr_of_items = user_stocks ? user_stocks.amount : 0;
@@ -152,17 +160,15 @@ const Personals = {
 
         db.run(`INSERT INTO user_stocks(item_name, amount, buyer_id, buy_in_price)
           VALUES(?, ?, ?, ?) ON CONFLICT(item_name, buyer_id) DO UPDATE SET
-          amount=?`, stockToBuy, newAmount, userId, oldPrice, newAmount,
+          amount=?, buy_in_price=?`, stockToBuy, newAmount, userId, oldPrice, newAmount, oldPrice,
           (err: any, finniszhed) => {
             if (err) {
               return Personals
                 .sendError(res, '/user/stock/buy', 'Database error.', err.message, 500);
             }
 
-            console.log(finniszhed);
-
             return res.status(201).json({
-              msg: 'ALL IS WORKED, did exist'
+              message: 'ALL IS WORKED, did exist'
             });
           });
       });

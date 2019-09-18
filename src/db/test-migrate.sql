@@ -76,8 +76,15 @@ BEGIN
         VALUES(OLD.name, OLD.price);
 END;
 
+-- required for testing 
+-- "Gold", "Some gold", "https://www.goodreturns.in/img/2019/08/gold-1565419690.jpg", 5.65
 INSERT INTO items(name, description, picture, price)
 VALUES ("Gold", "Some gold", "https://www.goodreturns.in/img/2019/08/gold-1565419690.jpg", 5.65);
+
+INSERT INTO users(email, password, assets, first_name, last_name) VALUES
+(
+    'HeyHo@test.com', 'passes', 100.69, 'Ho', 'Hey'
+);
 
 CREATE TRIGGER IF NOT EXISTS buy_new_stocks AFTER INSERT ON user_stocks
 BEGIN
