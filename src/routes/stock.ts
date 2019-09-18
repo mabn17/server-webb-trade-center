@@ -18,7 +18,7 @@ stock.get('/history/stocks', (_req: AuthInfoRequest, res: express.Response, _nex
   Stocks.getAllHistory(res)
 );
 
-stock.get('/stocks/:user', (req: AuthInfoRequest, res: express.Response, next: express.NextFunction) =>
+stock.get('/stocks/user', (req: AuthInfoRequest, res: express.Response, next: express.NextFunction) =>
   Authentication.verify(req, res, next),
     (req: AuthInfoRequest, res: express.Response, _next: express.NextFunction) =>
       Stocks.getPersonalStocks(res, req)

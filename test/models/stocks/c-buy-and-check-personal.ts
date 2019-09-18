@@ -55,21 +55,20 @@ describe('Buys, Sells and checks if all values updates', () => {
         });
     });
   });
-  // describe('checks if assets has decreesed', () => {
-  //   it('Should be something cool', (done) => {
-  //     chai
-  //       .request(server)
-  //       .get('/stocks/user')
-  //       .send({ })
-  //       .end((err, res) => {
-  //        // Compare it to -> less then 100
-  //         const response = res.body.data;
-  //         res.should.have.status(500);
-  //         assert.equal(response, undefined);
-  //         done();
-  //       });
-  //   });
-  // });
+  describe('checks if assets has decreesed', () => {
+    it('Should be something cool', (done) => {
+      chai
+        .request(server)
+        .get('/user/self')
+        .send({ })
+        .end((err, res) => {
+          const response = res.body.data;
+          res.should.have.status(200);
+          assert.equal(response.assets < 100, true);
+          done();
+        });
+    });
+  });
 
   describe('Sell stock', () => {
     it('', (done) => {
@@ -104,22 +103,22 @@ describe('Buys, Sells and checks if all values updates', () => {
         });
     });
   });
-  // describe('Checks if assets has increesed', () => {
-  //   it('', (done) => {
-  //     chai
-  //       .request(server)
-  //       .get('/history/stocks')
-  //       .send({ })
-  //       .end((err, res) => {
-  //        // Compare it to -> higher then 100
-  //         const response = res.body.data;
-  //         res.should.have.status(200);
-  //         assert.equal(response.length, 1);
+  describe('Checks if assets has increesed', () => {
+    it('', (done) => {
+      chai
+        .request(server)
+        .get('/user/self')
+        .send({ })
+        .end((err, res) => {
+          // Compare it to -> higher then 100
+          const response = res.body.data;
+          res.should.have.status(200);
+          assert.equal(response.assets > 100, true);
 
-  //         done();
-  //       });
-  //   });
-  // });
+          done();
+        });
+    });
+  });
 
   describe('Buy invalid number of stocks', () => {
     it('Should return 400', (done) => {
