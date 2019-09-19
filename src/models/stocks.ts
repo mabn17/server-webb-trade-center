@@ -85,7 +85,23 @@ const Stocks = {
     }
 
     const userId = req.user ? req.user.id : 1;
-    DataB.all('SELECT * FROM user_stocks WHERE buyer_id = ?', [ userId ]).then((data: any) => {
+    const sql = `
+      SELECT
+        A.id AS id,
+        A.item_name AS item_name,
+        A.amount AS amount,
+        A.buyer_id AS buyer_id,
+        A.buy_in_price AS buy_in_price,
+        A.buy_in_date AS buy_in_date,
+        B.price AS price
+      FROM user_stocks AS A
+        INNER JOIN items AS B
+      ON
+        A.item_name = B.name
+      WHERE
+        A.buyer_id = ?
+    `;
+    DataB.all(sql, [ userId ]).then((data: any) => {
       if (data === undefined) {
         return sendError(res, '/stocks/:user', 'No stocks found.', 'Could not find any stocks', 401);
       } else if (noRes) {
