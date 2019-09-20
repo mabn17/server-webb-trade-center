@@ -55,6 +55,11 @@ export class SocketServer {
           this.io.emit('message', m);
         });
 
+        socket.on('stock update', (change: any) => {
+          console.log('[server](stock update): %s', JSON.stringify(change));
+          this.io.emit('stock update', change);
+        });
+
         socket.on('disconnect', () => {
             console.log('Client disconnected');
         });

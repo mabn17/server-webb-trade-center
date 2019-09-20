@@ -31,7 +31,10 @@ const Stocks = {
    */
   getAllHistory: function(res: Response) {
     const DataB = new Database();
-    const sql = `SELECT * FROM price_log WHERE when_time BETWEEN datetime('now', '-6 days') AND datetime('now', 'localtime')`;
+    const sql = `
+      SELECT * FROM price_log WHERE when_time
+      BETWEEN datetime('now', '-6 days') AND
+      datetime('now', 'localtime') ORDER BY id DESC LIMIT 49`;
 
     DataB.all(sql, []).then((data: any) => {
       if (data === undefined) {
