@@ -5,6 +5,7 @@
 
 import { Request } from 'express';
 import { VerifyCallback } from 'jsonwebtoken';
+import * as ioServer from 'socket.io';
 
 export interface UserToken {
   id?: number;
@@ -22,6 +23,7 @@ export interface AuthInfoRequest extends Request {
     last_name?: string,
     assets?: number
   };
+  io?: ioServer.Server;
 }
 
 export interface Veryfied extends VerifyCallback {

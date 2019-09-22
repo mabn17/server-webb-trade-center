@@ -55,7 +55,7 @@ class Database {
   }
 }
 
-function randomizePrice(min = 10.10, max = 10000.10) {
+function randomizePrice(min = 40.10, max = 300.10) {
   /* istanbul ignore next */
   if (process.env.NODE_ENV !== 'test') {
     return parseFloat((Math.random() * (max - min) + min).toFixed(2));

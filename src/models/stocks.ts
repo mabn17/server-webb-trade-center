@@ -50,7 +50,7 @@ const Stocks = {
    * @param res express.Response
    * @param req AuthInfoRequest (extended express.req)
    */
-  updateAllStockPrices: function (res: Response, _req: AuthInfoRequest) {
+  updateAllStockPrices: function (res: Response, req: AuthInfoRequest) {
     const DataB = new Database();
 
     DataB.all('SELECT * FROM items', []).then(async (rows: any) => {

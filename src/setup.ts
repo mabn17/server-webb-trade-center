@@ -50,11 +50,6 @@ export class SocketServer {
 
     this.io.on('connect', (socket) => {
         console.log('Connected client on port %s.', this.port);
-        socket.on('message', (m: any) => {
-          console.log('[server](message): %s', JSON.stringify(m));
-          this.io.emit('message', m);
-        });
-
         socket.on('stock update', (change: any) => {
           console.log('[server](stock update): %s', JSON.stringify(change));
           this.io.emit('stock update', change);
