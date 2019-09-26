@@ -24,8 +24,14 @@ personal.post('/user/stocks/buy', (req: AuthInfoRequest, res: express.Response, 
 
 personal.get('/user/self', (req: AuthInfoRequest, res: express.Response, next: express.NextFunction) =>
   Authentication.verify(req, res, next),
-  (req: AuthInfoRequest, res: express.Response, next: express.NextFunction) =>
+  (req: AuthInfoRequest, res: express.Response, _next: express.NextFunction) =>
     Personals.getPersonalData(res, req)
+);
+
+personal.post('/user/update/assets', (req: AuthInfoRequest, res: express.Response, next: express.NextFunction) =>
+  Authentication.verify(req, res, next),
+  (req: AuthInfoRequest, res: express.Response, _next: express.NextFunction) =>
+    Personals.updatePersonalAmount(res, req)
 );
 
 export { personal };

@@ -128,6 +128,30 @@ const Personals = {
     DataB.get('SELECT * FROM users WHERE id = ?', [ userId ])
       .then((user: any) => res.status(200).json({ data: user }))
       .catch((_err: any) => sendError(res, '/user/self', 'Auth Error', 'Could not find your user.', 401));
+  },
+
+  updatePersonalAmount: function(res: Response, req: AuthInfoRequest) {
+    const user = req.user || {};
+    const { newAmount } = req.body;
+
+    if (user === {} && process.env.NODE_ENV !== 'test') {
+      return sendError(res, '/user/update/assets', 'Token error',
+          'Could not accsess the user-token in header: x-access-token.', 401
+        );
+    }
+
+    if (!newAmount || isNaN(newAmount) || parseFloat(newAmount) <= 0) {
+      return sendError(res, '/user/update/assets', 'Value error',
+        'No new amount has been spesified', 400
+      );
+    }
+
+    const DataB = new Database();
+    const userId = user.id ? user.id : 1;
+
+    DataB.run('UPDATE users SET assets = ? WHERE id = ?', [ newAmount, userId ])
+      .then(() => res.status(202).json({ data: 'Your new amount has been placed' }))
+      .catch((err: any) => sendError(res, '/user/update/assets', 'Update error', err.message, 500));
   }
 };
 

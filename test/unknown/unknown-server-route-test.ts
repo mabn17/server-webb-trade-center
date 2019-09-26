@@ -16,7 +16,7 @@ import * as server from '../../src/index';
 import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 
-var should = require('chai').should();
+const should = require('chai').should();
 
 chai.should();
 chai.use(chaiHttp);

@@ -14,10 +14,6 @@ class Database {
 
   constructor() { this.db = db; }
 
-  public getDB() {
-    return this.db;
-  }
-
   public get(sql: string, params: Array<any> = []): any {
     return new Promise((resolve, reject) => {
       this.db.get(sql, params, (err, result) => {

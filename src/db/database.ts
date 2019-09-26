@@ -6,13 +6,11 @@
 import * as sqlite3 from 'sqlite3';
 import * as path from 'path';
 
-const sqlite = sqlite3.verbose();
 let db: sqlite3.Database;
+const sqlite = sqlite3.verbose();
+const sqlFile = process.env.SQL_FILE || 'wtc';
 
-const fileName: string = process.env.NODE_ENV === 'test'
-  ? '../../src/db/test.sqlite'
-  : '../../src/db/wtc.sqlite';
-
+const fileName: string = `../../src/db/${sqlFile}.sqlite`;
 const filePath: string = path.join(__dirname, fileName);
 
 db = new sqlite.Database(filePath);

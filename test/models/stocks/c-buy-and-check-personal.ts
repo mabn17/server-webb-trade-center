@@ -175,4 +175,68 @@ describe('Buys, Sells and checks if all values updates', () => {
         });
     });
   });
+
+  describe('Updating User Assets', () => {
+    it('Should return 400, no params', (done) => {
+      chai
+        .request(server)
+        .post('/user/update/assets')
+        .send({ })
+        .end((err, res) => {
+          res.should.have.status(400);
+
+          done();
+        });
+    });
+  });
+
+  describe('Updating user assets', () => {
+    it('Should return 202', (done) => {
+      chai
+        .request(server)
+        .post('/user/update/assets')
+        .send({ newAmount: 100.2 })
+        .end((err, res) => {
+          res.should.have.status(202);
+
+          done();
+        });
+    });
+  });
+
+  describe('Updating user assets with wrong values', () => {
+    it('Should return 400 with string', (done) => {
+      chai
+        .request(server)
+        .post('/user/update/assets')
+        .send({ newAmount: 'a' })
+        .end((err, res) => {
+          res.should.have.status(400);
+
+          done();
+        });
+    });
+    it('Should return 400 with 0', (done) => {
+      chai
+        .request(server)
+        .post('/user/update/assets')
+        .send({ newAmount: 0 })
+        .end((err, res) => {
+          res.should.have.status(400);
+
+          done();
+        });
+    });
+    it('Should return 400 with -1', (done) => {
+      chai
+        .request(server)
+        .post('/user/update/assets')
+        .send({ newAmount: -1 })
+        .end((err, res) => {
+          res.should.have.status(400);
+
+          done();
+        });
+    });
+  });
 });
