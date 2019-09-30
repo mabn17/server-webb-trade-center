@@ -149,7 +149,7 @@ const Personals = {
     const DataB = new Database();
     const userId = user.id ? user.id : 1;
 
-    DataB.run('UPDATE users SET assets = ? WHERE id = ?', [ newAmount, userId ])
+    DataB.run('UPDATE users SET assets = assets + ? WHERE id = ?', [ newAmount, userId ])
       .then(() => res.status(202).json({ data: 'Your new amount has been placed' }))
       .catch((err: any) => sendError(res, '/user/update/assets', 'Update error', err.message, 500));
   }

@@ -103,6 +103,8 @@ const Stocks = {
         A.item_name = B.name
       WHERE
         A.buyer_id = ?
+          AND
+        A.amount > 0
     `;
     DataB.all(sql, [ userId ]).then((data: any) => {
       if (data === undefined) {
