@@ -63,6 +63,7 @@ describe('Buys, Sells and checks if all values updates', () => {
         .send({ })
         .end((err, res) => {
           const response = res.body.data;
+
           res.should.have.status(200);
           assert.equal(response.assets < 100, true);
           done();
@@ -95,10 +96,7 @@ describe('Buys, Sells and checks if all values updates', () => {
           const response = res.body.data;
           res.should.have.status(200);
 
-          assert.equal(response.length, 1);
-          assert.equal(response[0]['item_name'], 'Gold');
-          assert.equal(response[0]['amount'], 0);
-
+          assert.equal(response.length, 0);
           done();
         });
     });
