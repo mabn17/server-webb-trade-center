@@ -73,13 +73,13 @@ VALUES
 
 INSERT INTO items(name, description, picture, price)
 VALUES
-    ("Gold", "Some gold", "https://www.goodreturns.in/img/2019/08/gold-1565419690.jpg", 100.65),
-    ("Silver", "Shiny silver", "https://static2.proactiveinvestors.co.uk/thumbs/upload/News/Image/2019_08/672z311_1567003954_shutterstock_256676086.jpg", 106.65),
-    ("Copper", "Our finest copper", "https://ak8.picdn.net/shutterstock/videos/34795558/thumb/1.jpg", 10000.65),
-    ("Palladium", "No idea what this is.", "https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/r-tPTIvHGjcujl71k/videoblocks-palladium-bars-background-animation-3d-rendering_rzuckvpsg_thumbnail-full01.png", 49.65),
-    ("Rhenium", "A rare mineral", "https://www.refractorymetal.org/wp-content/uploads/2018/01/pure-Rhenium.jpg", 106),
-    ("Osmium", "One of the heviest minerals on earth", "https://images.bonnier.cloud/files/ill/production/2018/10/14001131/osmium.jpg", 420.69),
-    ("Mercury", "Its deadly", "https://www.thebalance.com/thmb/xBwp2veZA_1i1fas8GH1ioSViCg=/3042x2282/smart/filters:no_upscale()/quicksilver-93292637-b2eb7c7902e04e93b371b22a06d099f5.jpg", 106)
+    ("Gold", "Nearly all of the gold on Earth came from meteorites that bombarded the planet over 200 million years after it formed.", "Gold.jpg", 100.65),
+    ("Silver", "Silver metal is not toxic to humans. In fact, it can be used as a food decoration. However, most silver salts are toxic. Silver is germicidal, meaning it kills bacteria and other lower organisms.", "Silver.jpg", 106.85),
+    ("Copper", "Copper is an essential element for human nutrition. The mineral is critical for blood cell formation and is found in many foods and most water supplies. Foods high in copper include leafy greens, grains, potatoes, and beans. Although it takes a lot of copper, it's possible to get too much. Excess copper can cause jaundice, anemia, and diarrhea (which may be blue!).", "Copper.jpg", 98.25),
+    ("Palladium", "At one time, palladium was used as an early treatment for tuberculosis, but its harmful side effects led to better treatment alternatives.", "Palladium.jpg", 49.65),
+    ("Rhenium", "Rhenium was the last element to be discovered that had a stable isotope; other elements have been discovered since that time, but they are radioactive.", "Rhenium.jpg", 106),
+    ("Osmium", "While most elements aren't know for the way they smell, osmium emits a characteristic unpleasant smell. The element and its compounds are highly toxic.", "Osmium.jpg", 130.69),
+    ("Mercury", "The element Mercury is named for the Roman god Mercury. Mercury is the only element to retain its alchemical name as its modern common name. The element was known to ancient civilizations, dating back to at least 2000 BCE Vials of pure mercury have been found in Egyptian tombs from the 1500s BCE.", "Mercury.jpg", 106)
 ;
 
 INSERT INTO user_stocks(item_name, amount, buyer_id, buy_in_price)
