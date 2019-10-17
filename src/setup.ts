@@ -20,6 +20,10 @@ export class SocketServer {
     this.sockets();
   }
 
+  public getSockets() {
+    return this.io;
+  }
+
   private setMode(mode: string) {
     this.mode = mode;
   }
@@ -36,7 +40,7 @@ export class SocketServer {
     this.io = ioServer(this.server);
   }
 
-  private getServer(): void {
+  private getServer() {
     this.server.listen(this.port, () => {
         console.log(`Running server on port ${this.port}`);
     });
@@ -59,6 +63,8 @@ export class SocketServer {
             console.log('Client disconnected');
         });
     });
+
+    return this.io;
   }
 
   private getTestServer(): Server {

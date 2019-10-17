@@ -33,26 +33,4 @@ app.use('/', auth);
 app.use('/', stock);
 app.use('/', personal);
 
-/**
- * |--------------------------------------------------
- * | GET /*
- * | Response for non recognized routes
- * | @retuns statusCode 404
- * |--------------------------------------------------
- */
-app.all(
-  '/**',
-  (
-    req: express.Request,
-    res: express.Response,
-    _next: express.NextFunction
-  ) => {
-    res
-      .status(404)
-      .json(
-        responses.getErrorMessage(req.url, 'Unknown route.', `Route '${req.url}' does not exists.`, 404)
-      );
-  }
-);
-
 export { app };

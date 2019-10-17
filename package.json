@@ -4,7 +4,7 @@
   "description": "# Badges",
   "main": "index.js",
   "scripts": {
-    "test": "bash reset-test.bash && sleep 4 && rm -rf .coverage .nyc_output && export NODE_ENV=test && nyc --cache false --reporter=html --reporter=clover --reporter=text mocha --timeout 15000 --require ts-node/register --exit './test/**/*.ts'",
+    "test": "bash reset-test.bash && sleep 4 && rm -rf .coverage .nyc_output && export NODE_ENV=test && nyc --cache false mocha --timeout 15000 --require ts-node/register --exit './test/**/*.ts'",
     "start": "export NODE_ENV=dev && nodemon -x ts-node src/index.ts",
     "start:prod": "node build/index.js",
     "clean:build": "rm -rf build",

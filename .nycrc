@@ -2,7 +2,10 @@
     "extends": "@istanbuljs/nyc-config-typescript",
     "description": "",
     "reporter": [
-        "lcov"
+      "lcov",
+      "clover",
+      "html",
+      "text"
     ],
     "include": [
       "src/**/*.ts"
