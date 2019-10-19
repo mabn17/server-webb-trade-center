@@ -28,6 +28,6 @@ Start production server: `npm run run:build && npm run start:prod`
 
 ## API Documentation
 1. [Authentication](src/routes/doc/Auth.md) - Login & Register route.  
-2. [User](src/routes/doc/User.md) - Get & Update assets.  
-3. [Stocks](src/routes/doc/Stocks.md) - Get personal & all stock values.  
-4. [Triggers](src/routes/doc/Triggers.md) - To change stock and see history of stock prices.
+2. [Personal](src/routes/doc/Personal.md) - Handles personal actions.  
+3. [Stocks](src/routes/doc/Stocks.md) - Get personal/all stock values and updates stocks.  
+
