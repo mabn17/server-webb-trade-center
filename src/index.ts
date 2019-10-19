@@ -17,11 +17,13 @@ const port: string = process.env.PORT || '8080';
 const server: http.Server = http.createServer(app);
 
 console.log('Now running', process.env.NODE_ENV, 'mode.');
-const test = new SocketServer(server, mode, port).init();
-app.set('socketio', test);
-module.exports = test;
 
-app.use('/', Router().get('/s', (req, res, _next) => {
+const build = new SocketServer(server, mode, port).init();
+
+app.set('socketio', build);
+module.exports = build;
+
+app.use('/', Router().get('/update', (req, res, _next) => {
   setTimeout(() => {
     req.app.get('socketio').emit('stock update', 'updated from server');
   }, 1000);
