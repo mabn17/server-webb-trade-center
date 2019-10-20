@@ -1,5 +1,6 @@
 # Express TypeScript Server
-An express server for exam project in [Ramverk2 *v2*](https://jsramverk.me).
+An express server for exam project in [Ramverk2 *v2*](https://jsramverk.me).  
+**Reasons** behind the techniques chosen for both the frontend and the backend can be found [here](https://gist.github.com/mabn17/6d6016b1e5bce632f8cbdf7a29013fad).  
 
 # Badges
 [![Build Status](https://travis-ci.org/mabn17/server-webb-trade-center.svg?branch=master)](https://travis-ci.org/mabn17/server-webb-trade-center)  
@@ -16,18 +17,13 @@ Start production server: `npm run run:build && npm run start:prod`
 
 ## Requirements
 1. [Sqlite3](https://www.sqlite.org/index.html)
-1. [Docker](https://www.docker.com/) - *(Only for test 2 - 5 see below)*
 
 # Testing 
-1. `npm test` - To see reports from the unittests.  
-2. `npm run test1` - Tests on the lastest npm version. 
-3. `npm run test2` - Tests on the lastest npm version 10.  
-4. `npm run test3` - Tests on the lastest npm version 8.
-5. `npm run test4` - Tests on the lastest npm version 6.
-6. `npm run test:ci` - For ***CI*** services.
+1. `npm test` - To run and generate coverage report.  
 
 ## API Documentation
 1. [Authentication](src/routes/doc/Auth.md) - Login & Register route.  
 2. [Personal](src/routes/doc/Personal.md) - Handles personal actions.  
 3. [Stocks](src/routes/doc/Stocks.md) - Get personal/all stock values and updates stocks.  
+3. [Errors](src/routes/doc/Error.md) - Shows how errors are displayed.  
 
