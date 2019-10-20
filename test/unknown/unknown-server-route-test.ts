@@ -27,8 +27,24 @@ describe('Api TEST exempel', () => {
       chai
         .request(server)
         .get('/doesnotexist')
-        .end((err, res) => {
+        .end((_err, res) => {
           res.should.have.status(404);
+          res.body.should.be.an('object');
+
+          done();
+        });
+    });
+  });
+});
+
+describe('Api socket exempel', () => {
+  describe('GET /update', () => {
+    it('202 All stocks updated', (done) => {
+      chai
+        .request(server)
+        .get('/update')
+        .end((_err, res) => {
+          res.should.have.status(202);
           res.body.should.be.an('object');
 
           done();

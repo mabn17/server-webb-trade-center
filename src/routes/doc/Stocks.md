@@ -96,7 +96,7 @@ Gets the 7 latest history changes for all stocks
 }
 ```
 
-# 4. Update all stocks
+# 3. Update all stocks
 Updates all the stocks
 
 **URL** : `/stocks`
@@ -126,7 +126,7 @@ Updates all the stocks
 }
 ```
 
-# 3. Update all stock prices
+# 4. Update all stock prices
 Update stocks then sends a socket emit.
 
 **URL** : `/update`
