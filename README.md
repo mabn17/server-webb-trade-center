@@ -1,6 +1,6 @@
 # Express TypeScript Server
 An express server for exam project in [Ramverk2 *v2*](https://jsramverk.me).  
-**Reasons** behind the techniques chosen for both the frontend and the backend can be found [here](https://gist.github.com/mabn17/6d6016b1e5bce632f8cbdf7a29013fad).  
+All of the **reasons** *(Krav 1-5)* behind the techniques chosen for both the frontend and the backend can be found [here](https://gist.github.com/mabn17/6d6016b1e5bce632f8cbdf7a29013fad).  
 
 # Badges
 [![Build Status](https://travis-ci.org/mabn17/server-webb-trade-center.svg?branch=master)](https://travis-ci.org/mabn17/server-webb-trade-center)  
