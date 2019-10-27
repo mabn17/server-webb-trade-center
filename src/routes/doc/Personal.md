@@ -110,7 +110,7 @@ The reponse
 }
 ```
 
-# 3. Sell Stocks
+# 4. Buy Stocks
 Lets the user buy stocks.
 
 **URL** : `/user/stocks/buy`
