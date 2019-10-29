@@ -48,7 +48,7 @@ const Stocks = {
       INNER JOIN items AS B ON A.item_name = B.name
       WHERE when_time
       BETWEEN datetime('now', '-6 days') AND
-      datetime('now', 'localtime') ORDER BY id DESC LIMIT 350`;
+      datetime('now', 'localtime') ORDER BY id DESC LIMIT 700`;
 
     DataB.all(sql, []).then((data: any) => {
       if (data === undefined) {
