@@ -70,9 +70,7 @@ For a User that requests his or hers data.
 
 ```json
 {
-    {
-      "data": "Your new amount has been placed"
-    }
+    "data": "Your new amount has been placed"
 }
 ```
 
@@ -105,16 +103,14 @@ The reponse
 
 ```json
 {
+    "data":
     {
-      "data":
-      {
         "message": "Stocks sucsessfully sold"
-      }
     }
 }
 ```
 
-# 3. Sell Stocks
+# 4. Buy Stocks
 Lets the user buy stocks.
 
 **URL** : `/user/stocks/buy`
@@ -143,8 +139,6 @@ The reponse
 
 ```json
 {
-    {
-      "message": "Stocks has been updated."
-    }
+    "message": "Stocks has been updated."
 }
 ```

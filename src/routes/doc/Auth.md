@@ -34,7 +34,10 @@ For a User on the local database that just got created.
 
 ```json
 {
-    "data": { "message": "User successfully registered." }
+    "data":
+    { 
+        "message": "User successfully registered."
+    }
 }
 ```
 
@@ -67,7 +70,8 @@ For a User on the local database just logged in.
 
 ```json
 {
-    "data": {
+    "data":
+    {
         "message": "User logged in",
         "user":
         {
