@@ -24,7 +24,7 @@ const build = new SocketServer(server, mode, port).init();
 app.set('socketio', build);
 
 if (process.env.NODE_ENV !== 'test') {
-  cron.scheduleJob('*/15 * * * * *', async () => {
+  cron.scheduleJob('*/30 * * * * *', async () => {
     await Stocks.cronJob();
     build.emit('stock update', 'updated from server');
   });

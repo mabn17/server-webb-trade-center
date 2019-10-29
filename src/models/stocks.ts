@@ -7,6 +7,12 @@ import { Response } from 'express';
 import { AuthInfoRequest } from '../@Interfaces/ExpressRequest';
 import { Database, randomizePrice, sendError } from './db/queries';
 
+function genRand(min: number, max: number, decimalPlaces: number) {
+  const rand = Math.random() * (max - min) + min;
+  const power = Math.pow(10, decimalPlaces);
+  return Math.floor(rand * power) / power;
+}
+
 const Stocks = {
   /**
    * Gets all current stocks from the database.
@@ -31,10 +37,6 @@ const Stocks = {
    */
   getAllHistory: function(res: Response) {
     const DataB = new Database();
-    // const sql = `
-    //   SELECT * FROM price_log WHERE when_time
-    //   BETWEEN datetime('now', '-6 days') AND
-    //   datetime('now', 'localtime') ORDER BY id DESC LIMIT 49`;
     const sql = `
       SELECT
       A.id AS id,
@@ -46,7 +48,7 @@ const Stocks = {
       INNER JOIN items AS B ON A.item_name = B.name
       WHERE when_time
       BETWEEN datetime('now', '-6 days') AND
-      datetime('now', 'localtime') ORDER BY id DESC LIMIT 49`;
+      datetime('now', 'localtime') ORDER BY id DESC LIMIT 350`;
 
     DataB.all(sql, []).then((data: any) => {
       if (data === undefined) {
@@ -137,7 +139,7 @@ const Stocks = {
     DataB.all('SELECT * FROM items', []).then(async (rows: any) => {
       for (let index = 0; index < rows.length; index++) {
         const row = rows[index];
-        const price = Math.floor(Math.random() * 10) + 1;
+        const price = genRand(0.1, 0.5, 2);
 
         if (Math.random() < 0.5 && row.price > price) {
           row.price -= price;
@@ -145,7 +147,7 @@ const Stocks = {
           row.price += price;
         }
 
-        await DataB.run('UPDATE items SET price = ? WHERE id = ?', [ row.price, row.id ]);
+        await DataB.run('UPDATE items SET price = ? WHERE id = ?', [ row.price.toFixed(2), row.id ]);
       }
     });
   }
