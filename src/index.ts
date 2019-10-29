@@ -4,6 +4,7 @@
  */
 
 import * as express from 'express';
+import * as cron from 'node-schedule';
 import './lib/env';
 import { app } from './app';
 import { Router } from 'express';
@@ -21,6 +22,14 @@ console.log('Now running', process.env.NODE_ENV, 'mode.');
 const build = new SocketServer(server, mode, port).init();
 
 app.set('socketio', build);
+
+if (process.env.NODE_ENV !== 'test') {
+  cron.scheduleJob('*/15 * * * * *', async () => {
+    await Stocks.cronJob();
+    build.emit('stock update', 'updated from server');
+  });
+}
+
 module.exports = build;
 
 app.use('/', Router().get('/update', (req, res, _next) => {
