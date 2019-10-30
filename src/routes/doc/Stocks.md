@@ -53,7 +53,7 @@ Displays a list of all current stocks
 ```
 
 # 2. Gets the stock history
-Gets the 7 latest history changes for all stocks
+Gets the 350 latest history changes for all stocks
 
 **URL** : `/history/stocks`
 
