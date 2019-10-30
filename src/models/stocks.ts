@@ -131,26 +131,26 @@ const Stocks = {
         data
       });
     }).catch((err: any) => sendError(res, '/sockets/:user', 'Database error.', err.message, 500));
-  },
-
-  cronJob: async function() {
-    const DataB = new Database();
-
-    DataB.all('SELECT * FROM items', []).then(async (rows: any) => {
-      for (let index = 0; index < rows.length; index++) {
-        const row = rows[index];
-        const price = genRand(0.1, 0.5, 2);
-
-        if (Math.random() < 0.5 && row.price > price) {
-          row.price -= price;
-        } else {
-          row.price += price;
-        }
-
-        await DataB.run('UPDATE items SET price = ? WHERE id = ?', [ row.price.toFixed(2), row.id ]);
-      }
-    });
   }
+
+  // cronJob: async function() {
+  //   const DataB = new Database();
+
+  //   DataB.all('SELECT * FROM items', []).then(async (rows: any) => {
+  //     for (let index = 0; index < rows.length; index++) {
+  //       const row = rows[index];
+  //       const price = genRand(0.1, 0.5, 2);
+
+  //       if (Math.random() < 0.5 && row.price > price) {
+  //         row.price -= price;
+  //       } else {
+  //         row.price += price;
+  //       }
+
+  //       await DataB.run('UPDATE items SET price = ? WHERE id = ?', [ row.price.toFixed(2), row.id ]);
+  //     }
+  //   });
+  // }
 };
 
 export { Stocks };
