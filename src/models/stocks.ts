@@ -75,8 +75,18 @@ const Stocks = {
       for (let index = 0; index < rows.length; index++) {
         const row = rows[index];
 
-        row.price = randomizePrice();
-        DataB.run('UPDATE items SET price = ? WHERE id = ?', [ row.price, row.id ]);
+        const price = genRand(0.1, 0.5, 2);
+
+        if (process.env.NODE_ENV === 'test') {
+          row.price = 15.5;
+        } else if (Math.random() < 0.5 && row.price > price) {
+          row.price -= price;
+        } else {
+          row.price += price;
+        }
+
+        // row.price = randomizePrice();
+        await DataB.run('UPDATE items SET price = ? WHERE id = ?', [ row.price.toFixed(2), row.id ]);
       }
 
       return res.status(202).json({
@@ -138,14 +148,14 @@ const Stocks = {
 
   //   DataB.all('SELECT * FROM items', []).then(async (rows: any) => {
   //     for (let index = 0; index < rows.length; index++) {
-  //       const row = rows[index];
-  //       const price = genRand(0.1, 0.5, 2);
+        // const row = rows[index];
+        // const price = genRand(0.1, 0.5, 2);
 
-  //       if (Math.random() < 0.5 && row.price > price) {
-  //         row.price -= price;
-  //       } else {
-  //         row.price += price;
-  //       }
+        // if (Math.random() < 0.5 && row.price > price) {
+        //   row.price -= price;
+        // } else {
+        //   row.price += price;
+        // }
 
   //       await DataB.run('UPDATE items SET price = ? WHERE id = ?', [ row.price.toFixed(2), row.id ]);
   //     }
