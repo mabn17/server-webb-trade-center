@@ -32,12 +32,13 @@ app.set('socketio', build);
 
 module.exports = build;
 
-app.use('/', Router().get('/update', (req, res, _next) => {
-  setTimeout(() => {
+app.use('/', Router().get('/update', async (req, res, _next) => {
+  const resp = await Stocks.updateAllStockPrices(res, req);
+  if (process.env.NODE_ENV !== 'test') {
     req.app.get('socketio').emit('stock update', 'updated from server');
-  }, 1000);
+  }
 
-  return Stocks.updateAllStockPrices(res, req);
+  return resp;
 }));
 
 /**
